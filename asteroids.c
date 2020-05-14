@@ -10,6 +10,7 @@
 
 /*
  * TODO: Add start interface
+ * TODO: Add end game interface - explosion?
  * TODO: Add defined "rounds" of the game
  * TODO: Add "stages" - consisting of rounds, where the difficulty increases at each stage.
  *                      ship colour and speed will also increase.
@@ -52,7 +53,7 @@ void main(void) {
     os_add_task( update_asteroids,  6, 0 );
     os_add_task( check_pos,        120, 0 );
     os_add_task( increase_difficulty, 10000, 0);
-    os_add_task( fuel_cell, 1000,0);
+    os_add_task( fuel_cell, 960,0);
 
     sei();;
     for(;;){}
@@ -164,7 +165,6 @@ int check_pos(int state){
 				int yDist = abs(a.y - p.y);
 				if(yDist < 11 && xDist < 11){
 					game_state = ENDING;
-					LED_OFF;
 					break;
 				}
 			}
@@ -177,7 +177,7 @@ void create_asteroid(Asteroid *a){
 	int axis = rand_num(3);
 	if(axis==0){
 		(*a).loc.x = 0;
-		(*a).loc.y = rand_num(LCDHEIGHT);
+		(*a).loc.y = rand_num(LCDWIDTH);
 		(*a).vel.x = rand_num(max_asteroid_speed-1)+1;
 		(*a).vel.y = rand_num(max_asteroid_speed*2)-max_asteroid_speed;
 	}else if(axis==1){
@@ -192,7 +192,7 @@ void create_asteroid(Asteroid *a){
 		(*a).vel.y = -rand_num(max_asteroid_speed-1)-1;
 	}else{
 		(*a).loc.x = LCDHEIGHT;
-		(*a).loc.y = rand_num(LCDHEIGHT);
+		(*a).loc.y = rand_num(LCDWIDTH);
 		(*a).vel.x = -rand_num(max_asteroid_speed-1)-1;
 		(*a).vel.y = rand_num(max_asteroid_speed*2)-max_asteroid_speed;
 	}

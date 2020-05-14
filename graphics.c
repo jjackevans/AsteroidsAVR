@@ -79,7 +79,7 @@ void move_asteroid(Asteroid *a){
     Point n = (*a).loc;
     translate(&n, (*a).vel);
     draw_asteroid( (*a).loc, (*a).rad, display.background);
-    if(n.x > LCDHEIGHT || n.x < 0 || n.y > LCDWIDTH || n.y <0){
+    if(n.x > LCDHEIGHT-1 || n.x < 5 || n.y > LCDWIDTH-1 || n.y <1){
         (*a).alive = 0;
     }else{
         draw_asteroid( n, (*a).rad, ASTEROID_COLOUR);
@@ -127,7 +127,7 @@ void draw_points(uint16_t score){
     char buffer[25];
     itoa(score, buffer, 10);
     display_move(0, LCDWIDTH-15);
-    display_string(&buffer);
+    display_string(&buffer[0]);
 }
 
 /*

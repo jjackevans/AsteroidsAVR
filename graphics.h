@@ -36,6 +36,8 @@ typedef struct Asteroid{
 	int8_t alive;           // (Still on screen)
 } Asteroid;
 
+void init_graphics(void);
+
 /**
  * Moves the ship, using the rotary encoder position and speed.
  * TODO: Move with acceleration
