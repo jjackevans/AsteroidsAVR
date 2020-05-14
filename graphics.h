@@ -1,4 +1,5 @@
-#include "lcd.h"
+#ifndef graphics_h
+#define graphics_h
 #include "bezier.h"
 #include "bresenham.h"
 #include "wu.h"
@@ -73,3 +74,5 @@ void draw_fuel_cell(Point p);
  * @param p - position of the fuel cell.
  */
 void remove_fuel_cell(Point p);
+
+#endif
