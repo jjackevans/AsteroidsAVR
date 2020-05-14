@@ -12,3 +12,5 @@
 - Peter Danneger's code (adapted by Klaus-Peter Zauner) for the rotary encoder.
 - Steve Gunn's code (adapted by Klaus-Peter Zauner) for the lcd.
 - Nicholas Bishop's Small Graphics code to draw the sprites.
+
+![alt text](https://raw.githubusercontent.com/jjackevans/AsteroidsAVR/master/im.jpg "Show image")
