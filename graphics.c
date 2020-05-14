@@ -145,3 +145,12 @@ void draw_fuel_cell_timebar(int timeLeft){
     rectangle p = {0, length, 0, 5};
     fill_rectangle(p, TIMEBAR_COLOUR);
 }
+
+void draw_points(uint16_t score){
+    rectangle c = {0, 20, LCDWIDTH-20, LCDHEIGHT};
+    fill_rectangle(c, display.background);
+    char buffer[25];
+    itoa(score, buffer, 10);
+    display_move(0, LCDWIDTH-15);
+    display_string(&buffer);
+}

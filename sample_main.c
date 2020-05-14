@@ -32,7 +32,9 @@ int astroid_count;
 int game_state = 0;  
 int position   = 0;
 int asteroid_state=0;
+int cells_collected=0;
 Point p;
+
 
 Point fuelCell;
 int fuel_cell_active;
@@ -127,6 +129,7 @@ void update_ship(void) {
 	Point n;
 	move_ship(p, position*10, &n, ship_speed);
 	p=n;
+	draw_points(cells_collected);
 	// asteroid_state = update_asteroids(asteroid_state);
 	// return state;
 }
@@ -164,6 +167,7 @@ int check_pos(int state){
                 fuel_cell_active=0;
                 draw_fuel_cell_timebar(0);
                 remove_fuel_cell(fuelCell);
+                cells_collected++;
             }
         }
         int i;
