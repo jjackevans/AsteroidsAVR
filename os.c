@@ -24,3 +24,8 @@ void os_init(void) {
     os_init_scheduler();
     os_init_ruota();
 }
+
+void os_reinit(void){
+    os_clear();
+    os_init_ruota();
+}

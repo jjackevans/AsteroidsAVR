@@ -28,6 +28,16 @@ void drawLinePoints(Point p1, Point p2, uint16_t col){
 	drawLine(p1.x, p1.y, p2.x, p2.y, col);
 }
 
+void drawRectangle(rectangle r , uint16_t col){
+    Point tl = {r.left, r.top};
+    Point tr = {r.right, r.top};
+    Point br = {r.right, r.bottom};
+    Point bl = {r.left, r.bottom};
+    drawLinePoints(tl,tr,col);
+    drawLinePoints(tr,br,col);
+    drawLinePoints(br,bl,col);
+    drawLinePoints(bl,tl,col);
+}
 
 void drawLine(int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t col) {
 	// if(x1<0){x1=0;}

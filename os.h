@@ -37,5 +37,6 @@
 FATFS FatFs;
 
 void os_init(void);
+void os_reinit(void);
 
 #endif /* OS_H */

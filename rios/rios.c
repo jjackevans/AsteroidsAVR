@@ -100,6 +100,15 @@ void os_led_brightness(uint8_t level) {
 	}
 }
 
+void os_clear(void){
+    uint8_t i;
+    for (i=0; i <= tasksNum; ++i) {
+        tasks[i].state=0;
+    }
+    tasksNum=-1;
+
+}
+
 
 #else
 

@@ -1,10 +1,17 @@
 #include "graphics.h"
+#include <string.h>
 
 #define PI 3.14159265
 
 ShipVertex previousDraw;
 ShipVertex toDraw;
 ShipVertex natural;
+ShipVertex sv1;
+ShipVertex sv2;
+ShipVertex sv3;
+
+uint16_t ship_colour;
+Point startLoc;
 
 void draw_asteroid(Point pos, int32_t r, uint16_t col);
 void translate(Point *p, Point o);
@@ -16,18 +23,82 @@ void draw_ship(ShipVertex sv, uint16_t col);
  * Constructs the natural ship (ship vertex at origin)
  */
 void init_graphics(void){
-	init_bres();
-	natural.nose.x = 0;
-	natural.nose.y = - SHIP_LENGTH/2;
-	natural.leftRear.x = - SHIP_WIDTH/2;
-	natural.leftRear.y = SHIP_LENGTH/2;
-	natural.rightRear.x = SHIP_WIDTH/2;
-	natural.rightRear.y = SHIP_LENGTH/2;
-	natural.leftCentre.x = - SHIP_LENGTH/2;
-	natural.leftCentre.y = 0;
-	natural.rightCentre.x = SHIP_LENGTH/2;
-	natural.rightCentre.y = 0;
-	previousDraw=natural;
+    natural.nose.x = 0;
+    natural.nose.y = - SHIP_LENGTH/2;
+    natural.leftRear.x = - SHIP_WIDTH/2;
+    natural.leftRear.y = SHIP_LENGTH/2;
+    natural.rightRear.x = SHIP_WIDTH/2;
+    natural.rightRear.y = SHIP_LENGTH/2;
+    natural.leftCentre.x = - SHIP_LENGTH/2;
+    natural.leftCentre.y = 0;
+    natural.rightCentre.x = SHIP_LENGTH/2;
+    natural.rightCentre.y = 0;
+    previousDraw=natural;
+    init_bres();
+    char s1[] = "               _                 _     _     \n";
+    char s2[] = "     /\\       | |               (_)   | |    \n";
+    char s3[] = "    /  \\   ___| |_ ___ _ __ ___  _  __| |___ \n";
+    char s4[] = "   / /\\ \\ / __| __/ _ \\ '__/ _ \\| |/ _` / __|\n";
+    char s5[] = "  / ____ \\\\__ \\ ||  __/ | | (_) | | (_| \\__ \\\n";
+    char s6[] = " /_/    \\_\\___/\\__\\___|_|  \\___/|_|\\__,_|___/\n";
+    display_string_xy(s1, LCDHEIGHT / 2 - (3 * strlen(s1)), LCDWIDTH / 2 - 34);
+    display_string_xy(s2, LCDHEIGHT / 2 - (3 * strlen(s2)), LCDWIDTH / 2 - 26);
+    display_string_xy(s3, LCDHEIGHT / 2 - (3 * strlen(s3)), LCDWIDTH / 2 - 18);
+    display_string_xy(s4, LCDHEIGHT / 2 - (3 * strlen(s4)), LCDWIDTH / 2 - 10);
+    display_string_xy(s5, LCDHEIGHT / 2 - (3 * strlen(s5)), LCDWIDTH / 2 - 2);
+    display_string_xy(s6, LCDHEIGHT / 2 - (3 * strlen(s6)), LCDWIDTH / 2 + 6);
+    int offset = 12;
+    sv1 = natural;
+    sv2 = natural;
+    sv3 = natural;
+    Point d1 = {LCDHEIGHT/2 -(9*3 + 12*6) -2 , LCDWIDTH/2 +39 + offset + 1};
+    Point d2 = {LCDHEIGHT/2, LCDWIDTH/2 +39 + offset + 1};
+    Point d3 = {LCDHEIGHT/2 +(9*3 + 12*6) -2 , LCDWIDTH/2 +39 + offset + 1};
+    sv1.centre=d1;
+    sv2.centre=d2;
+    sv3.centre=d3;
+    position_ship(&sv1, 0, d1);
+    position_ship(&sv2, 0, d2);
+    position_ship(&sv3, 0, d3);
+    highlight_difficulty(0);
+}
+
+// rectangle left, right, top, bottom
+Point highlight_difficulty(int difficulty){
+    if(difficulty==0){
+        ship_colour = ALICE_BLUE;
+        draw_ship(sv1, ship_colour);
+        ship_colour=BLUE_VIOLET;
+        draw_ship(sv3, ship_colour);
+        ship_colour=ROYAL_BLUE;
+        draw_ship(sv2, ship_colour);
+    }
+    if(difficulty==1){
+        startLoc = sv1.centre;
+        ship_colour = ALICE_BLUE;
+        draw_ship(sv1, ship_colour);
+        draw_ship(sv2, display.background);
+        draw_ship(sv3, display.background);
+    }
+    else if(difficulty==2){
+        startLoc = sv2.centre;
+        ship_colour=ROYAL_BLUE;
+        draw_ship(sv1, display.background);
+        draw_ship(sv2, ship_colour);
+        draw_ship(sv3, display.background);
+    }
+    else if(difficulty==3){
+        startLoc = sv3.centre;
+        ship_colour=BLUE_VIOLET;
+        draw_ship(sv1, display.background);
+        draw_ship(sv2, display.background);
+        draw_ship(sv3, ship_colour);
+    }else if(difficulty==4){
+        draw_ship(sv1, display.background);
+        draw_ship(sv2, display.background);
+        draw_ship(sv3, display.background);
+    }
+    return startLoc;
 }
 
 void move_ship(Point pos, int angle, Point *nextPos, int speed){
@@ -40,7 +111,7 @@ void move_ship(Point pos, int angle, Point *nextPos, int speed){
 	if(previousDraw.nose.x!=natural.nose.x){
 		draw_ship(previousDraw,display.background);
 	}
-	draw_ship(toDraw,SHIP_COLOUR);
+	draw_ship(toDraw,ship_colour);
 	previousDraw=toDraw;
 }
 
@@ -122,7 +193,7 @@ void draw_fuel_cell_timebar(int timeLeft){
 }
 
 void draw_points(uint16_t score){
-    rectangle c = {0, 20, LCDWIDTH-20, LCDHEIGHT};
+    rectangle c = {0, 5, LCDWIDTH-15, LCDWIDTH-10};
     fill_rectangle(c, display.background);
     char buffer[25];
     itoa(score, buffer, 10);

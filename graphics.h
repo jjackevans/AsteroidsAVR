@@ -8,9 +8,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define HIGHLIGHT_COLOUR ALICE_BLUE
 #define SHIP_LENGTH 20
 #define SHIP_WIDTH  16
-#define SHIP_COLOUR ALICE_BLUE
 #define TIMEBAR_COLOUR GREEN
 #define FUEL_CELL_COLOUR GREEN
 #define ASTEROID_COLOUR RED
@@ -19,6 +19,7 @@
  * Defines a set vertexes used to draw the ship.
  */
 typedef struct ShipVertex{
+    Point centre;
 	Point nose;
 	Point leftRear;
 	Point rightRear;
@@ -37,6 +38,8 @@ typedef struct Asteroid{
 } Asteroid;
 
 void init_graphics(void);
+
+Point highlight_difficulty(int difficulty);
 
 /**
  * Moves the ship, using the rotary encoder position and speed.
