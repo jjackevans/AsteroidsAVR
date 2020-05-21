@@ -14,7 +14,11 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+     MODIFIED BY JE1G18 - 2020
+
+     */
 
 int16_t findBezier(double t, uint16_t x[4]) {
 	double omt = 1-t;
@@ -25,6 +29,7 @@ int16_t findBezier(double t, uint16_t x[4]) {
 	return (int16_t) xt+0.5;
 }
 
+// JE1G18 2020
 void plotBezierPoints(Point p[4], uint16_t col, double segSize){
 	uint16_t x[4] = {p[0].x, p[1].x, p[2].x, p[3].x}; 
 	uint16_t y[4] = {p[0].y, p[1].y, p[2].y, p[3].y};

@@ -90,8 +90,6 @@ void set_orientation(orientation o) {
     write_data16(display.height-1);
 }
 
-
-
 void set_frame_rate_hz(uint8_t f) {
     uint8_t diva, rtna, period;
     if (f>118)

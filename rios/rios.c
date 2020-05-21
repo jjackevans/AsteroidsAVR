@@ -5,7 +5,9 @@
 
    Slightly modified by Klaus-Peter Zauner, Feb 2014, Mar 2015.
 
-   For Copyright and License see end of file. 
+   For Copyright and License see end of file.
+
+   MODIFIED BY JE1G18 2020
 
 */
 

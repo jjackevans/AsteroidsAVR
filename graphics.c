@@ -1,3 +1,23 @@
+// Copyright 2020 je1g18
+//
+//  Permission is hereby granted, free of charge, to any person obtaining
+//  a copy of this software and associated documentation files (the "Software")
+//  , to deal in the Software without restriction, including without limitation
+//  the rights to use, copy, modify, merge, publish, distribute, sublicense,
+//  and/or sell copies of the Software, and to permit persons to whom the
+//  Software is furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included
+//  in all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+//  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
+
 #include "graphics.h"
 #include <string.h>
 
@@ -101,6 +121,10 @@ Point highlight_difficulty(int difficulty){
     return startLoc;
 }
 
+void draw_centered_text(*char str, int8_t y){
+      display_string_xy(str,LCDHEIGHT/2-strlen(str)*3, LCDWIDTH/2 +y);
+}
+
 void move_ship(Point pos, int angle, Point *nextPos, int speed){
 	(*nextPos).y = -speed;
 	(*nextPos).x = 0;
@@ -130,12 +154,14 @@ void position_ship(ShipVertex *sv, int angle, Point pos){
 	translate(&(*sv).leftCentre, pos);
 	translate(&(*sv).rightCentre, pos);
 }
+
 void draw_ship(ShipVertex sv, uint16_t col){
 	drawLinePoints(sv.nose, sv.leftRear, col);
 	drawLinePoints(sv.nose, sv.rightRear, col);
 	Point rear[] = {sv.leftRear, sv.leftCentre, sv.rightCentre, sv.rightRear};
 	plotBezierPoints(rear, col, 0.5);
 }
+
 void rotate(Point *p, int angle){
     int16_t newX, newY;
     float val = angle * PI/ 180;
@@ -174,6 +200,7 @@ void draw_fuel_cell(Point p){
     drawCircle( p.x, p.y, 2, FUEL_CELL_COLOUR);
     drawCircle( p.x, p.y, 1, FUEL_CELL_COLOUR);
 }
+
 void remove_fuel_cell(Point p){
     drawCircle( p.x, p.y, 4, display.background);
     drawCircle( p.x, p.y, 3, display.background);
@@ -210,15 +237,6 @@ void translate(Point *p, Point o){
     newY = (*p).y + o.y;
     (*p).x = newX;
     (*p).y = newY;
-}
-
-void debug(char msg[], int var){
-	char buffer[25];
-	itoa(var, buffer, 10);
-	display_string("\n");
-	display_string(msg);
-	display_string(" : ");
-	display_string(buffer);
 }
 
 
