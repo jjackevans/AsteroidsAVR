@@ -4,11 +4,11 @@
 
 > Asteroids is a retro arcade-style game that requires the player to navigate a pixel spaceship through an asteroid field, while collecting fuel cells.
 
-The player can select from three different gamemodes: normal, difficult and impossible. 
-The harder gameplays take place much faster, and reward more points per fuel cell.
-Each fuel cell must be reached before the time-bar runs out or the game will end.
+> The player can select from three different gamemodes: normal, difficult and impossible. 
+> The harder gameplays take place much faster, and reward more points per fuel cell.
+> Each fuel cell must be reached before the time-bar runs out or the game will end.
 
-If an mSD-card is located in the device, the high-score within the game will be saved and displayed to the user.
+> If an mSD-card is located in the device, the high-score within the game will be saved and displayed to the user.
 
 ## Installation
 
