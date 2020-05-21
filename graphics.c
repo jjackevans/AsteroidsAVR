@@ -61,12 +61,12 @@ void init_graphics(void){
     char s4[] = "   / /\\ \\ / __| __/ _ \\ '__/ _ \\| |/ _` / __|\n";
     char s5[] = "  / ____ \\\\__ \\ ||  __/ | | (_) | | (_| \\__ \\\n";
     char s6[] = " /_/    \\_\\___/\\__\\___|_|  \\___/|_|\\__,_|___/\n";
-    display_string_xy(s1, LCDHEIGHT / 2 - (3 * strlen(s1)), LCDWIDTH / 2 - 34);
-    display_string_xy(s2, LCDHEIGHT / 2 - (3 * strlen(s2)), LCDWIDTH / 2 - 26);
-    display_string_xy(s3, LCDHEIGHT / 2 - (3 * strlen(s3)), LCDWIDTH / 2 - 18);
-    display_string_xy(s4, LCDHEIGHT / 2 - (3 * strlen(s4)), LCDWIDTH / 2 - 10);
-    display_string_xy(s5, LCDHEIGHT / 2 - (3 * strlen(s5)), LCDWIDTH / 2 - 2);
-    display_string_xy(s6, LCDHEIGHT / 2 - (3 * strlen(s6)), LCDWIDTH / 2 + 6);
+    draw_centered_text(s1,  - 34);
+    draw_centered_text(s2,  - 26);
+    draw_centered_text(s3,  - 18);
+    draw_centered_text(s4,  - 10);
+    draw_centered_text(s5,  - 2);
+    draw_centered_text(s6,    6);
     int offset = 12;
     sv1 = natural;
     sv2 = natural;
@@ -121,7 +121,7 @@ Point highlight_difficulty(int difficulty){
     return startLoc;
 }
 
-void draw_centered_text(*char str, int8_t y){
+void draw_centered_text(char *str, int8_t y){
       display_string_xy(str,LCDHEIGHT/2-strlen(str)*3, LCDWIDTH/2 +y);
 }
 

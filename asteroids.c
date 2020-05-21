@@ -38,9 +38,11 @@ int update_asteroids(int);
 int check_collisions(int);
 void start_game(int);
 uint16_t rand_num(uint16_t) ;
-void create_asteroid(Asteroid);
+void create_asteroid(Asteroid *a);
 int write_highscore(uint16_t);
 uint16_t get_highscore(void);
+int increase_speed(int);
+void decrease_speed(void);
 
 // Location of ship on screen
 Point p;
@@ -193,7 +195,7 @@ int end_game(int state){
 int collect_delta(int state) {
 	int v = os_enc_delta();
 	if(v!=0){
-	    decrease_speed(0);
+	    decrease_speed();
 	}
 	encoder_position += v;
 	if(state==1) {

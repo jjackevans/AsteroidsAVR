@@ -102,7 +102,7 @@ void remove_fuel_cell(Point p);
  * @param str - string to write.
  * @param y - vertical offset from centre.
  */
-void draw_centered_text(*char str, int8_t y);
+void draw_centered_text(char *str, int8_t y);
 
 /**
  * Draws spaceship below selected difficulty.
